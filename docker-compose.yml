@@ -20,3 +20,9 @@ services:
     container_name: node_exporter
     ports:
       - "9100:9100"
+
+  blackbox:
+    image: prom/blackbox-exporter
+    container_name: blackbox
+    ports:
+      - "9115:9115"
