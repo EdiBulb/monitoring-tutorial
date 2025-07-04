@@ -1,0 +1,11 @@
+groups:
+  - name: Blackbox Alerts
+    rules:
+      - alert: WebsiteDown
+        expr: probe_success{instance="https://google.com"} == 0
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "Google is down!"
+          description: "The probe to google.com has failed for more than 30 seconds."

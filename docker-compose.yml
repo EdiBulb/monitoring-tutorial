@@ -6,6 +6,8 @@ services:
     container_name: prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/alert_rules.yml:/etc/prometheus/alert_rules.yml   # ✅ 이 줄 추가!
+
     ports:
       - "9090:9090"
 
@@ -26,3 +28,13 @@ services:
     container_name: blackbox
     ports:
       - "9115:9115"
+
+  alertmanager:
+    image: prom/alertmanager
+    container_name: alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager:/etc/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
